@@ -1,7 +1,6 @@
 #pragma once
 #include "pch.h"
 
-
 static const int imageHeight = 28;
 static const int imageWidth = 28;
 

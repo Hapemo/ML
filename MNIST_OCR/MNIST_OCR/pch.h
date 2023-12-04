@@ -7,6 +7,7 @@
 #include <filesystem>
 #include "image.hpp"
 #include "Texture.hpp"
+#include <Dense>
 
 
 
