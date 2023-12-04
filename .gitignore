@@ -396,3 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+*.jpg
+*.png
+*.jpg
+asset/MNIST - JPG - testing/0/1001.jpg
