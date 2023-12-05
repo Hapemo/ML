@@ -10,17 +10,21 @@ class JazzImage {
 public:
 	JazzImage(filepath);
 
-	char* Begin();
-	
-	void RangeCallBack();
+	// Print out the image with ' ' and '0'
+	void Print();
 
-	bool GetPixel(int row, int col);
-	void SetPixel(int row, int col, bool state);
+	// Convert image data into vector
+	Eigen::VectorXd GetVector();
+
+	// Get pixel at 2D coordinate of image
+	float GetPixel(int row, int col);
+	// Set pixel at 2D coordinate of image
+	void SetPixel(int row, int col, float val);
 
 private:
-	char mData[imageHeight*imageWidth];
-	int mHeight = imageHeight;
-	int mWidth = imageWidth;
+	Eigen::VectorXd mData;
+	int mHeight;
+	int mWidth;
 
 };
 
