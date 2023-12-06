@@ -22,7 +22,8 @@ public:
 
 private:
 
-	Eigen::VectorXd SigmoidActivation(Eigen::VectorXd const& zVal);
+	// Actual sigmoid function is computationally slow, so a good enough approximation will be used instead
+	Eigen::VectorXd FastSigmoidActivationVector(Eigen::VectorXd zVal);
 
 	std::vector<Eigen::MatrixXd> mHiddenLayerWeights;
 };
