@@ -4,11 +4,11 @@
 static const int imageHeight = 28;
 static const int imageWidth = 28;
 
-class JazzImage {
+class Image {
 	using filepath = std::filesystem::path;
 
 public:
-	JazzImage(filepath);
+	Image(filepath);
 
 	// Print out the image with ' ' and '0'
 	void Print();

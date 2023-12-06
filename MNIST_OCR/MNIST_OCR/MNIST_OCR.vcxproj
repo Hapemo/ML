@@ -147,12 +147,14 @@ copy "$(SolutionDir)..\lib\SFML-2.6.0\bin\sfml-window-2.dll" "$(TargetDir)sfml-w
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="JazzImage.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="NeuralNetwork.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="JazzImage.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NeuralNetwork.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
