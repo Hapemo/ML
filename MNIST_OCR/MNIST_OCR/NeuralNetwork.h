@@ -10,14 +10,19 @@
 #define TrainImagePath "../../asset/MNIST - JPG - training/"
 #define TestImagePath "../../asset/MNIST - JPG - testing/"
 
+class NeuralNetwork;
 
 class Tester {
 public:
-	static void TestTrainingZero();
+	Tester();
 
+	static void TestTrainingZero();
+	static void TestTrainingAll();
+	static Eigen::VectorXd AnswerGenerator(int answer);
 
 private:
-
+	static NeuralNetwork globalNN;
+	static std::vector<Eigen::VectorXd> Answers;
 };
 
 // 2 hidden layers only

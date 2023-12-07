@@ -21,8 +21,8 @@ int main() {
 	std::cout << "mConst =" << std::endl << mConst<< std::endl;
 
 #endif
-
-	Tester::TestTrainingZero();
+	Tester();
+	Tester::TestTrainingAll();
 
 	return 1;
 }

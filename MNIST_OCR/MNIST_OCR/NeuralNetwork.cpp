@@ -1,9 +1,16 @@
 #include "NeuralNetwork.h"
 #include "Image.h"
 
-void Tester::TestTrainingZero() {
-	NeuralNetwork nn(28*28, 16, 16, 10);
+NeuralNetwork Tester::globalNN(28*28, 16, 16, 10);
+std::vector<Eigen::VectorXd> Tester::Answers;
 
+Tester::Tester() {
+	int counter{};
+	while (counter != 10)
+		Answers.push_back(AnswerGenerator(counter++));
+}
+
+void Tester::TestTrainingZero() {
 	// Train all 0s
 	int zeroTrainingCounter{};
 	Eigen::VectorXd AnswerZero = Eigen::VectorXd(10).setZero();
@@ -12,20 +19,45 @@ void Tester::TestTrainingZero() {
 	std::filesystem::path imgZeroPath(std::string(TrainImagePath) + "0");
 	for (std::filesystem::path const& entry : std::filesystem::directory_iterator(imgZeroPath)) {
 		if (++zeroTrainingCounter % 1000 == 0) std::cout << "zeroTrainingCounter: " << zeroTrainingCounter << '\n';
-		nn.Train(Image(entry).GetVector(), AnswerZero, 50);
+		globalNN.Train(Image(entry).GetVector(), AnswerZero, 50);
 	}
 
-	nn.PrintWeights();
+	globalNN.PrintWeights();
 
 	std::filesystem::path imgTestZeroPath(std::string(TestImagePath) + "0/3.jpg");
-	std::cout << nn.ForwardPropagation(Image(imgTestZeroPath).GetVector()) << '\n';
-	
+	std::cout << globalNN.ForwardPropagation(Image(imgTestZeroPath).GetVector()) << '\n';
+}
+
+void Tester::TestTrainingAll() {
+	int TrainingCounter{};
+
+	for (int i{}; i < 10; ++i) {
+		std::filesystem::path testFolderPath(std::string(TrainImagePath) + std::to_string(i));
+		for (std::filesystem::path const& entry : std::filesystem::directory_iterator(testFolderPath)) {
+			if (++TrainingCounter % 1000 == 0) std::cout << "TrainingCounter: " << TrainingCounter << '\n';
+			globalNN.Train(Image(entry).GetVector(), Answers[i], 1);
+		}
+
+		globalNN.PrintWeights();
+
+		std::filesystem::path imgTestZeroPath(std::string(TestImagePath) + "0/3.jpg");
+		std::cout << globalNN.ForwardPropagation(Image(imgTestZeroPath).GetVector()) << '\n';
+	}
+
+
 
 }
 
+Eigen::VectorXd Tester::AnswerGenerator(int answer) {
+	Eigen::VectorXd Answer = Eigen::VectorXd(10).setZero();
+	Answer[answer] = 1;
+	return Answer;
+}
+
+
 NeuralNetwork::NeuralNetwork(int inputSize, int HL1Size, int HL2Size, int outputSize) {
 
-	mWeights.push_back(Eigen::MatrixXd::Zero(HL1Size, inputSize));
+	mWeights.push_back(Eigen::MatrixXd::Zero(HL1Size, inputSize + 1));
 	mWeights.push_back(Eigen::MatrixXd::Zero(HL2Size, HL1Size));
 	mWeights.push_back(Eigen::MatrixXd::Zero(outputSize, HL2Size));
 
