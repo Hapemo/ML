@@ -5,7 +5,7 @@
 Image::Image(filepath path) {
 	sf::Image image;
 
-	std::cout << path.string() << '\n';
+	//std::cout << path.string() << '\n';
 
 	image.loadFromFile(path.string());
 	auto dimension = image.getSize();

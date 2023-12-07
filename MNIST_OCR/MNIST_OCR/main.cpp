@@ -3,11 +3,6 @@
 #include "NeuralNetwork.h"
 
 int main() {
-
-	std::filesystem::path img1("..\\..\\asset\\arrow.jpg");
-
-	Image loadedImg(img1);
-
 #if 0 // Eigen lib testing
 
 	std::cout << loadedImg.GetVector();
@@ -27,7 +22,7 @@ int main() {
 
 #endif
 
-	NNTest();
+	Tester::TestTrainingZero();
 
 	return 1;
 }

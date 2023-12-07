@@ -7,7 +7,18 @@
 
 */
 
-void NNTest();
+#define TrainImagePath "../../asset/MNIST - JPG - training/"
+#define TestImagePath "../../asset/MNIST - JPG - testing/"
+
+
+class Tester {
+public:
+	static void TestTrainingZero();
+
+
+private:
+
+};
 
 // 2 hidden layers only
 class NeuralNetwork {
@@ -19,9 +30,11 @@ public:
 	// Forward propagation takes in input to first layer and returns the result of final layer using
 	Eigen::VectorXd ForwardPropagation(Eigen::VectorXd const& input);
 
-	void Train(Eigen::VectorXd const& input, Eigen::VectorXd const& expectedResult);
+	void Train(Eigen::VectorXd const& input, Eigen::VectorXd const& expectedResult, float learningRate);
 
 	//void BackwardPropagation(Eigen::VectorXd const& predicted, Eigen::VectorXd const& actual);
+
+	void PrintWeights();
 
 private:
 
