@@ -2,6 +2,7 @@
 
 #include <array>
 #include <vector>
+#include <deque>
 #include <iostream>
 #include <memory>
 #include <filesystem>

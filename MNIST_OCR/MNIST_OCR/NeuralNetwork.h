@@ -18,14 +18,19 @@ public:
 
 	// Forward propagation takes in input to first layer and returns the result of final layer using
 	Eigen::VectorXd ForwardPropagation(Eigen::VectorXd const& input);
-	void BackwardPropagation();
+
+	void Train(Eigen::VectorXd const& input, Eigen::VectorXd const& expectedResult);
+
+	//void BackwardPropagation(Eigen::VectorXd const& predicted, Eigen::VectorXd const& actual);
 
 private:
 
 	// Actual sigmoid function is computationally slow, so a good enough approximation will be used instead
 	Eigen::VectorXd FastSigmoidActivationVector(Eigen::VectorXd zVal);
 
-	std::vector<Eigen::MatrixXd> mHiddenLayerWeights;
+	Eigen::VectorXd CostFunction(Eigen::MatrixXd const& weights, Eigen::VectorXd const& activatedLayer, Eigen::VectorXd const& prevError);
+
+	std::vector<Eigen::MatrixXd> mWeights;
 };
 
 
